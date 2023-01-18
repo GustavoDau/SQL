@@ -83,4 +83,40 @@ SELECT name, capital
   FROM world
   WHERE LEFT(name, 1) = LEFT(capital, 1) AND name <> capital
 ```
-
+# SELECT from Nobel
+1. Show who won the 1962 prize for literature. <br />
+```
+SELECT winner FROM nobel
+WHERE yr = 1962 AND subject = 'Literature'
+```
+2.Show the year and subject that won 'Albert Einstein' his prize. <br />
+```
+SELECT yr, subject FROM nobel
+WHERE winner = 'Albert Einstein'
+```
+3.Give the name of the 'peace' winners since the year 2000, including 2000. <br />
+```
+SELECT winner FROM nobel
+ WHERE yr >= 2000 AND subject = 'Peace'
+```
+4.Show all details (yr, subject, winner) of the literature prize winners for 1980 to 1989 inclusive. <br />
+```
+SELECT yr, subject, winner FROM nobel
+WHERE yr >= 1980 AND yr <= 1989 AND subject = 'Literature'
+```
+5.Show all details of the presidential winners <br />
+```
+SELECT * FROM nobel
+WHERE winner IN ('Theodore Roosevelt', 'Woodrow Wilson','Jimmy Carter', 'Barack Obama')
+```
+6.Show the year, subject, and name of physics winners for 1980 together with the chemistry winners for 1984. <br />
+```
+SELECT * FROM nobel
+WHERE (subject = 'Physics' AND yr = 1980) OR (subject = 'Chemistry' AND yr = 1984)
+```
+7.Show the year, subject, and name of winners for 1980 excluding chemistry and medicine. <br />
+```
+SELECT * FROM nobel
+WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine')
+```
+8.
