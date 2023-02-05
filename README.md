@@ -153,5 +153,21 @@ SELECT name, continent FROM world
 ```
 4.Which country has a population that is more than United Kingom but less than Germany? Show the name and the population. <br />
 ```
-
+SELECT name, population FROM world
+  WHERE population > (SELECT population FROM world WHERE name = 'Canada') AND
+        population < (SELECT population FROM world WHERE name = 'Poland')
 ```
+5.Show the name and the population of each country in Europe. Show the population as a percentage of the population of Germany. <br />
+```
+SELECT name, 
+  CONCAT(CAST(ROUND(population*100/(SELECT population FROM world
+    WHERE name='Germany'), 0) AS INT), '%') AS 'percentage' FROM world
+      WHERE continent = 'Europe'
+```
+6.Which countries have a GDP greater than every country in Europe? [Give the name only.] (Some countries may have NULL gdp values) <br />
+```
+SELECT name FROM world
+  WHERE gdp > ALL(SELECT gdp FROM world
+    WHERE continent='Europe' AND gdp > 0)
+```
+7.Find the largest country (by area) in each continent, show the continent, the name and the area. <br />
